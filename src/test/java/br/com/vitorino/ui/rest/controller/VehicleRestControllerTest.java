@@ -76,6 +76,23 @@ public class VehicleRestControllerTest {
         given().delete("/vehicle/{id}", UUID.randomUUID().toString()).then().statusCode(HttpStatus.OK.value());
     }
 
+    @Test
+    public void testIfDeleteAllReturnsOk() throws JsonProcessingException {
+        create();
+        create();
+
+        List<VehicleListResponseDTO> list = mapper.readValue(given().get("/vehicle").andReturn().getBody().asString(), mapper.getTypeFactory().constructParametricType(List.class, VehicleListResponseDTO.class));
+
+        assertFalse(list.isEmpty());
+        assertEquals(2, list.size());
+
+        given().delete("/vehicle").then().statusCode(HttpStatus.OK.value());
+
+        list = mapper.readValue(given().get("/vehicle").andReturn().getBody().asString(), mapper.getTypeFactory().constructParametricType(List.class, VehicleListResponseDTO.class));
+
+        assertTrue(list.isEmpty());
+    }
+
     private VehicleListResponseDTO create() throws JsonProcessingException {
         var requestDto = new VehicleSaveRequestDTO();
         requestDto.setName(UUID.randomUUID().toString());
