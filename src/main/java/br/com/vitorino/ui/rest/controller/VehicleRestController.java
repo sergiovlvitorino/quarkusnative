@@ -28,13 +28,13 @@ public class VehicleRestController {
     private static final Logger log = LoggerFactory.getLogger(VehicleRestController.class);
 
     @Autowired
-    private VehicleMapper mapper;
+    VehicleMapper mapper;
 
     @Autowired
-    private ObjectMapper objectMapper;
+    ObjectMapper objectMapper;
 
     @Autowired
-    private VehicleCommandProcessor commandProcessor;
+    VehicleCommandProcessor commandProcessor;
 
     @GetMapping
     public ResponseEntity get() {

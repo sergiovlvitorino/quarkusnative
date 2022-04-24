@@ -13,7 +13,7 @@ import java.util.UUID;
 public class VehicleCommandProcessor {
 
     @Autowired
-    private VehicleRepository repository;
+    VehicleRepository repository;
 
     public Vehicle save(final Vehicle vehicle) {
         vehicle.setId(UUID.randomUUID());

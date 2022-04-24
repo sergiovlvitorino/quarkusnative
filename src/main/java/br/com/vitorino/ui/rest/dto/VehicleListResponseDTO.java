@@ -3,6 +3,7 @@ package br.com.vitorino.ui.rest.dto;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 import java.util.UUID;
+
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class VehicleListResponseDTO {
 
