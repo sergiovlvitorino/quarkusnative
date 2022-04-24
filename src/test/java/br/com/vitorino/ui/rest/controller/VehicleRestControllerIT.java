@@ -1,9 +1,10 @@
-package br.com.vitorino;
+package br.com.vitorino.ui.rest.controller;
 
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 
 @QuarkusIntegrationTest
-public class GreetingControllerIT extends GreetingControllerTest {
+public class VehicleRestControllerIT extends VehicleRestControllerTest{
 
     // Execute the same tests but in native mode.
+
 }
