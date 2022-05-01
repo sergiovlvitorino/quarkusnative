@@ -33,7 +33,11 @@ public class VehicleCommandProcessor {
     }
 
     public void deleteById(UUID id) {
-        if (repository.existsById(id))
+        if (existsById(id))
             repository.deleteById(id);
+    }
+
+    public boolean existsById(UUID id) {
+        return repository.existsById(id);
     }
 }

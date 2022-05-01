@@ -72,7 +72,7 @@ public class VehicleRestControllerTest {
     }
 
     @Test
-    public void testIfDeleteReturnsOkWhenVehicleNotExist() {
+    public void testIfDeleteReturnsOkWhenVehicleNotExists() {
         given().delete("/vehicle/{id}", UUID.randomUUID().toString()).then().statusCode(HttpStatus.OK.value());
     }
 
