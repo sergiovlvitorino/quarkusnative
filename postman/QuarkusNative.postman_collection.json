@@ -1,0 +1,131 @@
+{
+	"info": {
+		"_postman_id": "c34072c9-f418-489e-920e-ad099fda2f06",
+		"name": "QuarkusNative",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Save",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"Honda Civic 2022\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://intense-mountain-22795.herokuapp.com/vehicle",
+					"protocol": "https",
+					"host": [
+						"intense-mountain-22795",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"vehicle"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListAll",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://intense-mountain-22795.herokuapp.com/vehicle",
+					"protocol": "https",
+					"host": [
+						"intense-mountain-22795",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"vehicle"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://intense-mountain-22795.herokuapp.com/vehicle/0f60318a-e730-4c6d-a908-dabd50c8f763",
+					"protocol": "https",
+					"host": [
+						"intense-mountain-22795",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"vehicle",
+						"0f60318a-e730-4c6d-a908-dabd50c8f763"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteAll",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://intense-mountain-22795.herokuapp.com/vehicle",
+					"protocol": "https",
+					"host": [
+						"intense-mountain-22795",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"vehicle"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteById",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://intense-mountain-22795.herokuapp.com/vehicle/f859d098-f098-4296-afb7-182a10cd8dd6",
+					"protocol": "https",
+					"host": [
+						"intense-mountain-22795",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"vehicle",
+						"f859d098-f098-4296-afb7-182a10cd8dd6"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
