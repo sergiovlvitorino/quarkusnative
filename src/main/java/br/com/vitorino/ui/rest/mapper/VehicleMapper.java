@@ -4,27 +4,21 @@ import br.com.vitorino.domain.model.Vehicle;
 import br.com.vitorino.ui.rest.dto.VehicleListResponseDTO;
 import br.com.vitorino.ui.rest.dto.VehicleSaveRequestDTO;
 import br.com.vitorino.ui.rest.dto.VehicleSaveResponseDTO;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
-@Component
-public class VehicleMapper {
-    public Vehicle saveRequestDTOToModel(final VehicleSaveRequestDTO requestDTO) {
-        final Vehicle vehicle = new Vehicle();
-        vehicle.setName(requestDTO.getName());
-        return vehicle;
-    }
+@Mapper(componentModel = "cdi", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+public interface VehicleMapper {
 
-    public VehicleSaveResponseDTO modelToSaveResponseDTO(final Vehicle vehicle) {
-        final VehicleSaveResponseDTO responseDTO = new VehicleSaveResponseDTO();
-        responseDTO.setId(vehicle.getId());
-        return responseDTO;
-    }
+    @Mapping(source = "name", target = "name")
+    Vehicle saveRequestDTOToModel(final VehicleSaveRequestDTO requestDTO);
 
-    public VehicleListResponseDTO modelToListResponseDTO(final Vehicle vehicle) {
-        final VehicleListResponseDTO responseDTO = new VehicleListResponseDTO();
-        responseDTO.setId(vehicle.getId());
-        responseDTO.setName(vehicle.getName());
-        return responseDTO;
-    }
+    @Mapping(source = "id", target = "id")
+    VehicleSaveResponseDTO modelToSaveResponseDTO(final Vehicle vehicle);
+
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "name", target = "name")
+    VehicleListResponseDTO modelToListResponseDTO(final Vehicle vehicle);
 
 }

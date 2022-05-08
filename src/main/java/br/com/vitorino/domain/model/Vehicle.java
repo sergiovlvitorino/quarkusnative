@@ -1,9 +1,14 @@
 package br.com.vitorino.domain.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.UUID;
 
+@Getter
+@Setter
 @Entity
 public class Vehicle {
 
@@ -12,19 +17,4 @@ public class Vehicle {
 
     private String name;
 
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

@@ -6,6 +6,7 @@ import br.com.vitorino.ui.rest.dto.VehicleSaveResponseDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
@@ -18,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @QuarkusTest
 public class VehicleRestControllerTest {
 
-    private ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper mapper = new ObjectMapper();
 
     @Test
     public void testIfGetReturnsAList() throws JsonProcessingException {
@@ -54,7 +55,7 @@ public class VehicleRestControllerTest {
     public void testIfGetByIdReturnsOk() throws JsonProcessingException {
         var vehicle = create();
 
-        var response = given().get("/vehicle/{id}", vehicle.getId().toString()).andReturn();
+        Response response = given().get("/vehicle/{id}", vehicle.getId().toString()).andReturn();
         response.then().statusCode(HttpStatus.OK.value());
         var responseDto = mapper.readValue(response.getBody().asString(), VehicleListResponseDTO.class);
 

@@ -24,10 +24,10 @@ import java.util.stream.Collectors;
 public class VehicleRestController {
 
     @Autowired
-    VehicleMapper mapper;
+    VehicleCommandProcessor commandProcessor;
 
     @Autowired
-    VehicleCommandProcessor commandProcessor;
+    VehicleMapper mapper;
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
