@@ -9,7 +9,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-public class VehicleListResponseDTO {
+public class VehicleResponseDTO {
 
     private UUID id;
 

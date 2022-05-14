@@ -5,9 +5,8 @@ import br.com.vitorino.application.command.VehicleCommandProcessor;
 import br.com.vitorino.domain.model.Vehicle;
 import br.com.vitorino.infrastructure.exception.NotFoundException;
 import br.com.vitorino.infrastructure.exception.UnprocessableEntityException;
-import br.com.vitorino.ui.rest.dto.VehicleListResponseDTO;
+import br.com.vitorino.ui.rest.dto.VehicleResponseDTO;
 import br.com.vitorino.ui.rest.dto.VehicleSaveRequestDTO;
-import br.com.vitorino.ui.rest.dto.VehicleSaveResponseDTO;
 import br.com.vitorino.ui.rest.mapper.VehicleMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,20 +30,20 @@ public class VehicleRestController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public List<VehicleListResponseDTO> get() {
+    public List<VehicleResponseDTO> get() {
         return commandProcessor
                 .findAll()
                 .parallelStream()
-                .map(vehicle -> mapper.modelToListResponseDTO(vehicle))
+                .map(vehicle -> mapper.modelToResponseDTO(vehicle))
                 .collect(Collectors.toList());
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public VehicleSaveResponseDTO post(@RequestBody @Valid VehicleSaveRequestDTO requestDTO) throws JsonProcessingException {
+    public VehicleResponseDTO post(@RequestBody @Valid VehicleSaveRequestDTO requestDTO) throws JsonProcessingException {
         final Vehicle vehicle = commandProcessor.save(mapper.saveRequestDTOToModel(requestDTO));
         if (vehicle != null)
-            return mapper.modelToSaveResponseDTO(vehicle);
+            return mapper.modelToResponseDTO(vehicle);
         throw new UnprocessableEntityException("Item was not created");
     }
 
@@ -57,9 +56,9 @@ public class VehicleRestController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("{id}")
-    public VehicleListResponseDTO getById(@PathVariable UUID id) {
+    public VehicleResponseDTO getById(@PathVariable UUID id) {
         return mapper.
-                modelToListResponseDTO(
+                modelToResponseDTO(
                         commandProcessor
                                 .findById(id)
                                 .orElseThrow(() -> new NotFoundException("Item was not found")));

@@ -1,8 +1,7 @@
 package br.com.vitorino.ui.rest.controller;
 
-import br.com.vitorino.ui.rest.dto.VehicleListResponseDTO;
+import br.com.vitorino.ui.rest.dto.VehicleResponseDTO;
 import br.com.vitorino.ui.rest.dto.VehicleSaveRequestDTO;
-import br.com.vitorino.ui.rest.dto.VehicleSaveResponseDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.quarkus.test.junit.QuarkusTest;
@@ -29,7 +28,7 @@ public class VehicleRestControllerTest {
         response.then().statusCode(HttpStatus.OK.value());
         var responseBody = response.getBody().asString();
 
-        List<VehicleListResponseDTO> list = mapper.readValue(responseBody, mapper.getTypeFactory().constructParametricType(List.class, VehicleListResponseDTO.class));
+        List<VehicleResponseDTO> list = mapper.readValue(responseBody, mapper.getTypeFactory().constructParametricType(List.class, VehicleResponseDTO.class));
         assertTrue(list.isEmpty());
     }
 
@@ -44,7 +43,7 @@ public class VehicleRestControllerTest {
                 .when().post("/vehicle")
                 .andReturn();
 
-        var responseDTO = mapper.readValue(response.getBody().asString(), VehicleSaveResponseDTO.class);
+        var responseDTO = mapper.readValue(response.getBody().asString(), VehicleResponseDTO.class);
         assertNotNull(responseDTO);
         assertNotNull(responseDTO.getId());
 
@@ -57,7 +56,7 @@ public class VehicleRestControllerTest {
 
         Response response = given().get("/vehicle/{id}", vehicle.getId().toString()).andReturn();
         response.then().statusCode(HttpStatus.OK.value());
-        var responseDto = mapper.readValue(response.getBody().asString(), VehicleListResponseDTO.class);
+        var responseDto = mapper.readValue(response.getBody().asString(), VehicleResponseDTO.class);
 
         assertEquals(vehicle.getId(), responseDto.getId());
         assertEquals(vehicle.getName(), responseDto.getName());
@@ -82,19 +81,19 @@ public class VehicleRestControllerTest {
         create();
         create();
 
-        List<VehicleListResponseDTO> list = mapper.readValue(given().get("/vehicle").andReturn().getBody().asString(), mapper.getTypeFactory().constructParametricType(List.class, VehicleListResponseDTO.class));
+        List<VehicleResponseDTO> list = mapper.readValue(given().get("/vehicle").andReturn().getBody().asString(), mapper.getTypeFactory().constructParametricType(List.class, VehicleResponseDTO.class));
 
         assertFalse(list.isEmpty());
         assertEquals(2, list.size());
 
         given().delete("/vehicle").then().statusCode(HttpStatus.OK.value());
 
-        list = mapper.readValue(given().get("/vehicle").andReturn().getBody().asString(), mapper.getTypeFactory().constructParametricType(List.class, VehicleListResponseDTO.class));
+        list = mapper.readValue(given().get("/vehicle").andReturn().getBody().asString(), mapper.getTypeFactory().constructParametricType(List.class, VehicleResponseDTO.class));
 
         assertTrue(list.isEmpty());
     }
 
-    private VehicleListResponseDTO create() throws JsonProcessingException {
+    private VehicleResponseDTO create() throws JsonProcessingException {
         var requestDto = new VehicleSaveRequestDTO();
         requestDto.setName(UUID.randomUUID().toString());
 
@@ -104,8 +103,8 @@ public class VehicleRestControllerTest {
                 .when().post("/vehicle")
                 .andReturn();
 
-        var responseDTO = mapper.readValue(response.getBody().asString(), VehicleSaveResponseDTO.class);
-        return mapper.readValue(given().get("/vehicle/{id}", responseDTO.getId().toString()).andReturn().body().asString(), VehicleListResponseDTO.class);
+        var responseDTO = mapper.readValue(response.getBody().asString(), VehicleResponseDTO.class);
+        return mapper.readValue(given().get("/vehicle/{id}", responseDTO.getId().toString()).andReturn().body().asString(), VehicleResponseDTO.class);
     }
 
     private void delete(UUID id) {
