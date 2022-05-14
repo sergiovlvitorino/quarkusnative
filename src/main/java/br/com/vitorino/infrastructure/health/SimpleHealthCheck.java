@@ -1,4 +1,4 @@
-package br.com.vitorino.infrastructure;
+package br.com.vitorino.infrastructure.health;
 
 import org.eclipse.microprofile.health.HealthCheck;
 import org.eclipse.microprofile.health.HealthCheckResponse;

@@ -1,7 +1,8 @@
 package br.com.vitorino.application.command;
 
+import br.com.vitorino.application.service.repository.VehicleRepository;
+import br.com.vitorino.application.visitor.GenerateIdVisitor;
 import br.com.vitorino.domain.model.Vehicle;
-import br.com.vitorino.domain.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,9 +15,11 @@ public class VehicleCommandProcessor {
 
     @Autowired
     VehicleRepository repository;
+    @Autowired
+    GenerateIdVisitor generateIdVisitor;
 
     public Vehicle save(final Vehicle vehicle) {
-        vehicle.setId(UUID.randomUUID());
+        vehicle.receive(generateIdVisitor);
         return repository.save(vehicle);
     }
 
